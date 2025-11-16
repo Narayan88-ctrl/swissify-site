@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Swissify – Swiss Standard German for Schools & Gemeinden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #05070d;
+      color: #f7f7f7;
+      line-height: 1.6;
+    }
+    a { color: #f97316; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .page { max-width: 1100px; margin: 0 auto; padding: 32px 16px 64px; }
+    .badge { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: #a3a3a3; }
+    header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+    .logo {
+      display: flex; align-items: center; gap: 10px; font-weight: 600;
+      letter-spacing: 0.08em; font-size: 14px;
+    }
+    .logo-mark {
+      width: 32px; height: 32px; border-radius: 9px;
+      background: #e53935;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .logo-cross {
+      position: relative; width: 60%; height: 60%;
+    }
+    .logo-cross::before,
+    .logo-cross::after {
+      content: "";
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.9);
+      border-radius: 4px;
+    }
+    .logo-cross::before {
+      width: 22%; height: 100%;
+      box-shadow: 0 0 0 6px rgba(255,255,255,0.25);
+    }
+    .logo-cross::after {
+      width: 100%; height: 22%;
+      opacity: 0.16;
+    }
+    .nav { display: flex; gap: 20px; font-size: 14px; }
+    .nav a { color: #e5e5e5; }
+    .tag-pill {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      font-size: 11px;
+      color: #e5e7eb;
+      background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(15,23,42,0.3));
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 40px);
+      margin-bottom: 12px;
+    }
+    .hero-sub {
+      font-size: 16px;
+      color: #e5e5e5;
+      margin-bottom: 20px;
+      max-width: 500px;
+    }
+    .hero-points { font-size: 14px; color: #d4d4d4; margin-bottom: 20px; }
+    .hero-points li { margin-left: 20px; margin-bottom: 4px; }
+
+    .buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 9px 16px; border-radius: 999px;
+      font-size: 13px; font-weight: 500;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.16s ease-out;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #f97316, #fb923c);
+      color: #111827;
+      box-shadow: 0 12px 30px rgba(248, 113, 22, 0.35);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 16px 36px rgba(248,113,22,0.5); }
+    .btn-ghost {
+      background: rgba(15,23,42,0.8);
+      border-color: rgba(148,163,184,0.6);
+      color: #e5e7eb;
+    }
+    .btn-ghost:hover { background: rgba(30,41,59,0.95); }
+
+    .hero-meta {
+      font-size: 12px; color: #9ca3af;
+    }
+    .hero-meta span { margin-right: 10px; }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(248,113,22,0.35), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(56,189,248,0.18), transparent 55%),
+                  #020617;
+      border-radius: 18px;
+      padding: 20px 18px;
+      border: 1px solid rgba(148,163,184,0.5);
+      box-shadow: 0 18px 45px rgba(15,23,42,0.9);
+      font-size: 13px;
+    }
+    .card h2 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    .card ul { padding-left: 18px; }
+    .card li { margin-bottom: 3px; }
+
+    section { margin-top: 40px; }
+    section h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .cols {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 18px;
+    }
+    .pill-list { font-size: 13px; color: #d4d4d4; }
+    .pill-list li { margin-left: 18px; margin-bottom: 4px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid rgba(55,65,81,0.9);
+      padding: 8px 10px;
+    }
+    th { background: rgba(15,23,42,0.95); text-align: left; }
+    tr:nth-child(even) td { background: rgba(15,23,42,0.7); }
+    tr:nth-child(odd) td { background: rgba(15,23,42,0.45); }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(31,41,55,0.9);
+      font-size: 12px;
+      color: #9ca3af;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    @media (max-width: 780px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .nav { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="logo">
+      <div class="logo-mark">
+        <div class="logo-cross"></div>
+      </div>
+      <div>
+        <div>SWISSIFY</div>
+        <div class="badge">SWISS STANDARD</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#demo">Live demo</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="tag-pill">For Swiss schools · Gemeinden · Administration</span>
+        <h1>Turn High German into Swiss Standard — in one click.</h1>
+        <p class="hero-sub">
+          Swissify converts any German text into Swiss Standard German:
+          spelling, numbers, lexicon, and quotation marks — tailored for schools,
+          Gemeinden and official documents.
+        </p>
+        <ul class="hero-points">
+          <li>Strasse / Velo / Spital – correct Swiss wording</li>
+          <li>1’000 / 10’000 – Swiss number style</li>
+          <li>«Anführungszeichen» – Swiss quotation marks</li>
+          <li>DOCX + PDF conversion for real workloads</li>
+        </ul>
+        <div class="buttons">
+          <a class="btn btn-primary" href="#demo">Watch demo (EN &amp; DE)</a>
+          <a class="btn btn-ghost" href="#pricing">See pricing for schools</a>
+        </div>
+        <div class="hero-meta">
+          <span>Built in Switzerland 🇨��</span>
+          <span>Designed for classrooms &amp; Gemeinden</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h2>What Swissify fixes</h2>
+          <ul>
+            <li>High German → Swiss Standard spelling</li>
+            <li>Words: Fahrrad → Velo, Krankenhaus → Spital…</li>
+            <li>Numbers: 1.000 → 1’000</li>
+            <li>Quotes: „Hallo“ → «Hallo»</li>
+            <li>Consistent style for letters, notices, exams</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <h2>🎥 Live Demo</h2>
+      <p style="margin-bottom:8px;font-size:14px;color:#d4d4d4">
+        Full demo videos showing Swissify in real use for schools and Gemeinden.
+      </p>
+      <ul class="pill-list">
+        <li>🇬🇧 English demo – explanation of the engine and UI  
+          <a href="https://drive.google.com/file/d/1srn0IM4_WM_q1k0BSeodBdOe8tVHZ9N0/view?usp=drive_link" target="_blank">
+            Watch on Google Drive
+          </a>
+        </li>
+        <li>🇩🇪 German demo – Swiss classroom &amp; Gemeinde examples  
+          <a href="https://drive.google.com/file/d/1N2eInqi6OQ_KtnuaX_QkSUqyqUEKjoty/view?usp=drive_link" target="_blank">
+            Watch on Google Drive
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="how">
+      <h2>🧠 How Swissify works</h2>
+      <div class="cols">
+        <div>
+          <h3 style="font-size:14px;margin-bottom:4px;">Rule engine</h3>
+          <p style="font-size:13px;color:#d4d4d4">
+            Carefully curated rules and dictionaries map High German spelling,
+            vocabulary and punctuation to Swiss Standard German. Packs can be
+            tuned for schools, Gemeinden or media.
+          </p>
+        </div>
+        <div>
+          <h3 style="font-size:14px;margin-bottom:4px;">Documents in · Swiss Standard out</h3>
+          <p style="font-size:13px;color:#d4d4d4">
+            Swissify processes plain text, DOCX and PDF. Teachers and office
+            staff can upload existing documents and download a Swissified
+            version in seconds.
+          </p>
+        </div>
+        <div>
+          <h3 style="font-size:14px;margin-bottom:4px;">Runs locally or in the cloud</h3>
+          <p style="font-size:13px;color:#d4d4d4">
+            The engine can run locally in a school, Gemeinde or on a secure
+            cloud instance — respecting Swiss privacy and data protection.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <h2>💰 Pricing – Pilot Phase</h2>
+      <p style="font-size:14px;color:#d4d4d4;margin-bottom:6px;">
+        Swissify is currently in a pilot phase for Swiss schools and Gemeinden.
+        Pricing is kept simple and transparent.
+      </p>
+
+      <h3 style="font-size:14px;margin-top:10px;">For Schools</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Price (CHF / month)</th>
+            <th>For who?</th>
+            <th>What you get</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>School Basic</td>
+            <td>49</td>
+            <td>1 school (up to ~5 teachers)</td>
+            <td>Text → Swiss Standard, PDF/DOCX support, teacher-friendly UI</td>
+          </tr>
+          <tr>
+            <td>School Plus</td>
+            <td>79</td>
+            <td>1 school (unlimited teachers)</td>
+            <td>Everything in Basic + templates (letters, notices, exams)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size:14px;margin-top:16px;">For Gemeinden / Administration</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Price (CHF / month)</th>
+            <th>For who?</th>
+            <th>What you get</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gemeinde Standard</td>
+            <td>89</td>
+            <td>1 Gemeinde / Verwaltung</td>
+            <td>Swiss Standard engine for letters, rules, forms &amp; circulars</td>
+          </tr>
+          <tr>
+            <td>Gemeinde Pro</td>
+            <td>129</td>
+            <td>Gemeinde with multiple departments</td>
+            <td>Everything in Standard + custom packs &amp; priority support</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:#9ca3af;margin-top:6px;">
+        All prices are indicative for the pilot phase and can be adapted for
+        larger school networks or multiple Gemeinden.
+      </p>
+    </section>
+
+    <section id="contact">
+      <h2>📬 Pilot Access & Contact</h2>
+      <p style="font-size:14px;color:#d4d4d4;margin-bottom:4px;">
+        Swissify is currently available to selected schools and Gemeinden as a
+        30-day pilot.
+      </p>
+      <ul class="pill-list">
+        <li>30-day trial for your school or Gemeinde</li>
+        <li>Full access to the web engine, PDF/DOCX tools and rule packs</li>
+        <li>Onboarding call &amp; support in English or German</li>
+      </ul>
+      <p style="font-size:14px;color:#d4d4d4;margin-top:8px;">
+        📧 Email: <strong>narayanranabhat777@gmail.com</strong><br><br>
+        💼 GitHub (engine):
+        <a href="https://github.com/Narayan88-ctrl/Swissify" target="_blank">
+          Swissify repository
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2025 Swissify · Developed in Switzerland.</span>
+    <span>Founder: Narayan Ranabhat</span>
+  </footer>
+</div>
+</body>
+</html>
